@@ -97,12 +97,27 @@ WSGI_APPLICATION = "ou_vg.wsgi.application"
 #         }
 #     }
 # }
-import dj_database_url
+# import dj_database_url
 
+# DATABASES = {
+#     "default": dj_database_url.config(
+#         default="sqlite:///db.sqlite3"
+#     )
+# }
 DATABASES = {
-    "default": dj_database_url.config(
-        default="sqlite:///db.sqlite3"
-    )
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'mb_db',        # TiDB 数据库名
+        'USER': 'YJ75werzGUUCj7F.root',       # TiDB 用户名
+        'PASSWORD': 'Zcafn8pwWsmpU5mm',   # TiDB 密码
+        'HOST': 'gateway01.ap-northeast-1.prod.aws.tidbcloud.com',  # TiDB 访问地址
+        'PORT': '4000',                # TiDB 端口
+        'OPTIONS': {
+            'ssl': {
+                'ca': str(BASE_DIR / 'certs' / 'isrgrootx1.pem'), # Render 服务器上的证书路径
+            }
+        },
+    }
 }
 
 # Password validation
